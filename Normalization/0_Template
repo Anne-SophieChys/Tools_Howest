@@ -1,0 +1,66 @@
+
+
+                               UNF:
+===================================================================
+1. Add unorganized information (th's)
+2. Show repeating groups
+===================================================================
+e.g. DB(patient_no, patient_name, appointment_id, time, docter)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+
+                               1NF:
+===================================================================
+1. No repeating groups (also remove brackets[.])
+2. Define primary key
+3. All attributes depend on the primary key
+What we need to know to know the rest of DB
+===================================================================
+e.g. DB(*patient_no*, patient_name, *appointment_id*, time, doctor)
+- - - -	- - - -	- - - -	- - - -	- - - -	- - - -	- - - - - - - -	- -
+
+
+
+                               2NF:
+===================================================================
+1. Rules = 1NF
+2. Partial dependencies of non-key value?
+   If X (key) is know, can we automatically know Y (value)? 
+   No, create extra table (2nd NF violation)
+   Yes, but only partial of the key, create extra table
+===================================================================
+e.g. Patient(*patient_no*, patient_name)
+     Appointment(*patient_no*, *appointment_id*, time, doctor)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+
+                               3NF:
+===================================================================
+1. Rules = 2NF
+2. Transitive dependencies of non-key value?
+   Don't look at the keys!
+   Influence X --> Y? (X & Y = both non-key values)
+   No influence or no other non-key values present, leave it
+   Yes, create extra table (3th NF violation)
+===================================================================
+e.g. = 2NF
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+
+                               BCNF:
+===================================================================
+1. Rules = 3NF
+2. Does non-key values determine key value?
+   If X(non-key) changes, change Y(key)?
+   No, not a candidate key, create extra table (BCNF violation)
+   Yes, non-key is a candidate key, leave it
+===================================================================
+e.g. Patient(*patient_no*, patient_name)
+     Patient_time(*patient_no*, *time*, doctor)
+     Appointment_time(appointment_id, *time*)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
